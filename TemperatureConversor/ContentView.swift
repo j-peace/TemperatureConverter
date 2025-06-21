@@ -1,19 +1,19 @@
-//
-//  ContentView.swift
-//  TemperatureConversor
-//
-//  Created by Suno on 20/06/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    private let temperatureInCelsius: Double = 17.0
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Text("Convert your temperature in real time")
+        ZStack {
+            Image("mockup-apple-watch")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 500, height: 500)
+            
+            Text("\(temperatureInCelsius, specifier: "%.0f") °C")
+                .font(.largeTitle)
+                .foregroundColor(.black)
         }
         .padding()
     }
