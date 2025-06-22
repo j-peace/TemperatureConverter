@@ -1,10 +1,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var locationManager = LocationManager()
     private let temperatureInCelsius: Double = 17.0
     @State private var isTextHidden = false
 
     var body: some View {
+        
+        VStack {
+            if let location = locationManager.lastKnownLocation {
+                Text("Latitude: \(location.latitude)")
+                Text("Longitude: \(location.longitude)")
+            } else {
+                Text("Getting location...")
+            }
+        }
+        
         ZStack{
             LinearGradient(
                 gradient: Gradient(colors: [
@@ -90,6 +101,7 @@ struct ContentView: View {
 
                             Button(action: {
                                 isTextHidden.toggle()
+                                locationManager.checkLocationAuthorization()
                             }) {
                                 Text("Preview")
                                     .font(.custom("GillSans-SemiBold", size: 20))
