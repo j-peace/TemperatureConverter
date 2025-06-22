@@ -8,8 +8,8 @@ struct ContentView: View {
         ZStack{
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color(red: 161/255, green: 180/255, blue: 178/255), // #a1b4b2
-                    Color(red: 216/255, green: 236/255, blue: 234/255)  // #d8ecea
+                    .backgroundDarkBlue,
+                    .watchSecondary
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -18,30 +18,30 @@ struct ContentView: View {
             VStack {
                 Text("Temperature Conversor")
                     .font(.custom("GillSans-SemiBold", size: 27))
-                    .foregroundColor(Color(red: 40/255, green: 47/255, blue: 67/255))
+                    .foregroundColor(.watchTertiary)
 
                 (
                     Text("Convert your temperature in ") +
                     Text("real time")
                         .font(.custom("GillSans-Bold", size: 20))
-                        .foregroundColor(Color(red: 77/255, green: 143/255, blue: 248/255)) +
+                        .foregroundColor(.highlightYellow) +
                     Text("!")
                 )
                 .font(.custom("GillSans-SemiBold", size: 20))
-                .foregroundColor(Color(red: 40/255, green: 47/255, blue: 67/255))
+                .foregroundColor(.watchTertiary)
                 .padding(.bottom, 20)
                 
                 ZStack {
                     if !isTextHidden {
-                        Color(red: 42/255, green: 42/255, blue: 44/255)
+                        Color.previewCardBackground
                             .frame(width: 202, height: 232)
                             .padding(.trailing, 10)
                     }else {
-                        Color(red: 117/255, green: 118/255, blue: 135/255)
+                        Color.watchTertiary
                             .frame(width: 202, height: 232)
                             .padding(.trailing, 10)
                     }
-                    
+
                     Image("mockup-apple-watch")
                         .resizable()
                         .scaledToFit()
@@ -58,21 +58,23 @@ struct ContentView: View {
                             
                             Text("\(temperatureInCelsius, specifier: "%.0f") °C")
                                 .font(.largeTitle)
-                                .foregroundColor(.white)
+                                .foregroundColor(.watchPrimary)
 
                             HStack (spacing: 10) {
                                 VStack {
                                     Image(systemName: "chevron.down")
                                         .resizable()
                                         .frame(width: 15, height: 8)
+                                        .foregroundColor(.watchPrimary)
                                     Image(systemName: "chevron.down")
                                         .resizable()
                                         .frame(width: 15, height: 8)
                                         .padding(.top, -7)
+                                        .foregroundColor(.watchPrimary)
                                 }
                                 Text("swipe to change")
                                     .font(.custom("GillSans-SemiBold", size: 17))
-                                    .foregroundColor(Color(red: 40/255, green: 47/255, blue: 67/255))
+                                    .foregroundColor(.watchPrimary)
                             }
                             .padding(.top, 18)
                         }
@@ -96,8 +98,8 @@ struct ContentView: View {
                                     .background(
                                         LinearGradient(
                                             gradient: Gradient(colors: [
-                                                Color(red: 77/255, green: 143/255, blue: 248/255),
-                                                Color(red: 140/255, green: 140/255, blue: 255/255)
+                                                .watchPrimary,
+                                                .watchSecondary
                                             ]),
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
@@ -116,11 +118,20 @@ struct ContentView: View {
                         }) {
                             Text("Finish preview")
                                 .font(.custom("GillSans-SemiBold", size: 20))
-                                .foregroundColor(.white)
+                                .foregroundColor(.watchSecondary)
                                 .padding()
-                                .background(Color(red: 77/255, green: 143/255, blue: 248/255))
+                                .background(Color.highlightYellow)
                                 .cornerRadius(30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color.watchSecondary, lineWidth: 2)
+                                )
                         }
+                    } else {
+                        Text("Tap Preview to see the watch")
+                            .font(.custom("GillSans-SemiBold", size: 18))
+                            .foregroundColor(.watchTertiary)
+                            .padding(.top, 16)
                     }
                 }.frame(height: 80)
 
@@ -131,4 +142,17 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+// MARK: - Color Extension
+
+extension Color {
+    static let watchPrimary = Color(red: 0/255, green: 155/255, blue: 255/255)
+    static let watchSecondary = Color(red: 0/255, green: 78/255, blue: 182/255)
+    static let watchTertiary = Color(red: 230/255, green: 244/255, blue: 241/255)
+
+    static let previewBackgroundTop = Color(red: 161/255, green: 180/255, blue: 178/255)
+    static let previewCardBackground = Color(red: 42/255, green: 42/255, blue: 44/255)
+    static let highlightYellow = Color(red: 243/255, green: 213/255, blue: 91/255)
+    static let backgroundDarkBlue = Color(red: 26/255, green: 38/255, blue: 54/255)
 }
