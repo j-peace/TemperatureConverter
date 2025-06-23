@@ -5,6 +5,10 @@ struct ContentView: View {
     @State var showWatchUnitSheet = false
 
     var body: some View {
-        WatchPreviewView(viewModel: viewModel, showWatchUnitSheet: $showWatchUnitSheet)
+        ZStack {
+            Color.watchTertiary
+                .ignoresSafeArea()
+            WatchPreviewView(viewModel: viewModel, showWatchUnitSheet: $showWatchUnitSheet)
+        }
     }
 }
