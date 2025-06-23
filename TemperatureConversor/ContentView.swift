@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
+    @State private var showWatchUnitSheet = false
     
     var body: some View {
         
@@ -48,41 +49,65 @@ struct ContentView: View {
                         .frame(width: 500, height: 500)
                     
                     if viewModel.isTextHidden {
-                        
-                        VStack {
-                            
-                            Image("temperaturas")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .padding()
-                            
-                            if let temp = viewModel.currentTemperature {
-                                Text("\(temp, specifier: "%.0f") °C")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.watchPrimary)
-                            } else {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .watchPrimary))
-                            }
-
-                            HStack (spacing: 10) {
+                        ZStack {
+                            if showWatchUnitSheet {
                                 VStack {
-                                    Image(systemName: "chevron.down")
+                                    WatchUnitSelectionView(
+                                        units: ["K", "F", "C", "N"],
+                                        selectedUnit: viewModel.temperatureUnitSymbol,
+                                        onSelect: { unit in
+                                            viewModel.temperatureUnit = unit
+                                            showWatchUnitSheet = false
+                                        },
+                                        onClose: {
+                                            showWatchUnitSheet = false
+                                        }
+                                    )
+                                    .frame(width: 202, height: 232)
+                                }.padding(.top, 17)
+                            } else {
+                                VStack {
+                                    Image("temperaturas")
                                         .resizable()
-                                        .frame(width: 15, height: 8)
-                                        .foregroundColor(.watchPrimary)
-                                    Image(systemName: "chevron.down")
-                                        .resizable()
-                                        .frame(width: 15, height: 8)
-                                        .padding(.top, -7)
-                                        .foregroundColor(.watchPrimary)
+                                        .frame(width: 40, height: 40)
+                                        .padding()
+                                    if let temp = viewModel.currentTemperature {
+                                        Text("\(temp, specifier: "%.0f") °\(viewModel.temperatureUnitSymbol)")
+                                            .font(.largeTitle)
+                                            .foregroundColor(.watchPrimary)
+                                    } else {
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle(tint: .watchPrimary))
+                                    }
+                                    HStack (spacing: 10) {
+                                        VStack {
+                                            Image(systemName: "chevron.down")
+                                                .resizable()
+                                                .frame(width: 15, height: 8)
+                                                .foregroundColor(.watchPrimary)
+                                            Image(systemName: "chevron.down")
+                                                .resizable()
+                                                .frame(width: 15, height: 8)
+                                                .padding(.top, -7)
+                                                .foregroundColor(.watchPrimary)
+                                        }
+                                        Text("swipe to change")
+                                            .font(.custom("GillSans-SemiBold", size: 17))
+                                            .foregroundColor(.watchPrimary)
+                                    }
+                                    .padding(.top, 18)
                                 }
-                                Text("swipe to change")
-                                    .font(.custom("GillSans-SemiBold", size: 17))
-                                    .foregroundColor(.watchPrimary)
                             }
-                            .padding(.top, 18)
                         }
+                        .contentShape(Rectangle())
+                        .gesture(
+                            DragGesture(minimumDistance: 30, coordinateSpace: .local)
+                                .onEnded { value in
+                                    if value.translation.height < 0 {
+                                        showWatchUnitSheet = true
+                                    }
+                                }
+                        )
                     }
                     
                     if !viewModel.isTextHidden {

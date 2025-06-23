@@ -6,6 +6,11 @@ class ContentViewModel: ObservableObject {
     @Published var lastKnownLocation: CLLocationCoordinate2D?
     @Published var currentTemperature: Double?
     @Published var isTextHidden = false
+    @Published var temperatureUnit: String = "C" // Default to Celsius
+    
+    var temperatureUnitSymbol: String {
+        return temperatureUnit
+    }
     
     private let locationManager = LocationManager()
     private var locationCancellable: Any?
