@@ -52,18 +52,20 @@ struct ContentView: View {
                         ZStack {
                             if showWatchUnitSheet {
                                 VStack {
-                                    WatchUnitSelectionView(
-                                        units: ["K", "F", "C", "N"],
-                                        selectedUnit: viewModel.temperatureUnitSymbol,
-                                        onSelect: { unit in
-                                            viewModel.temperatureUnit = unit
-                                            showWatchUnitSheet = false
-                                        },
-                                        onClose: {
-                                            showWatchUnitSheet = false
-                                        }
-                                    )
-                                    .frame(width: 202, height: 232)
+                                    if !viewModel.units.isEmpty {
+                                        WatchUnitSelectionView(
+                                            units: viewModel.units,
+                                            selectedUnit: viewModel.temperatureUnitSymbol,
+                                            onSelect: { unit in
+                                                viewModel.temperatureUnit = unit
+                                                showWatchUnitSheet = false
+                                            },
+                                            onClose: {
+                                                showWatchUnitSheet = false
+                                            }
+                                        )
+                                        .frame(width: 202, height: 232)
+                                    }
                                 }.padding(.top, 17)
                             } else {
                                 VStack {
