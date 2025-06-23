@@ -49,58 +49,7 @@ struct ContentView: View {
                         .frame(width: 500, height: 500)
                     
                     if viewModel.isTextHidden {
-                        ZStack {
-                            if showWatchUnitSheet {
-                                VStack {
-                                    if !viewModel.units.isEmpty {
-                                        WatchUnitSelectionView(
-                                            units: viewModel.units,
-                                            selectedUnit: viewModel.temperatureUnit,
-                                            onSelect: { unit in
-                                                viewModel.selectUnit(unit)
-                                                showWatchUnitSheet = false
-                                            },
-                                            onClose: {
-                                                showWatchUnitSheet = false
-                                            }
-                                        )
-                                        .frame(width: 202, height: 232)
-                                    }
-                                }.padding(.top, 17)
-                            } else {
-                                VStack {
-                                    Image("temperaturas")
-                                        .resizable()
-                                        .frame(width: 40, height: 40)
-                                        .padding()
-                                    if let temp = viewModel.currentConvertedTemperature {
-                                        Text("\(temp, specifier: "%.0f") °\(viewModel.temperatureUnitSymbol)")
-                                            .font(.largeTitle)
-                                            .foregroundColor(.watchPrimary)
-                                    } else {
-                                        ProgressView()
-                                            .progressViewStyle(CircularProgressViewStyle(tint: .watchPrimary))
-                                    }
-                                    HStack (spacing: 10) {
-                                        VStack {
-                                            Image(systemName: "chevron.down")
-                                                .resizable()
-                                                .frame(width: 15, height: 8)
-                                                .foregroundColor(.watchPrimary)
-                                            Image(systemName: "chevron.down")
-                                                .resizable()
-                                                .frame(width: 15, height: 8)
-                                                .padding(.top, -7)
-                                                .foregroundColor(.watchPrimary)
-                                        }
-                                        Text("swipe to change")
-                                            .font(.custom("GillSans-SemiBold", size: 17))
-                                            .foregroundColor(.watchPrimary)
-                                    }
-                                    .padding(.top, 18)
-                                }
-                            }
-                        }
+                        WatchPreviewView(viewModel: viewModel, showWatchUnitSheet: $showWatchUnitSheet)
                         .contentShape(Rectangle())
                         .gesture(
                             DragGesture(minimumDistance: 30, coordinateSpace: .local)
@@ -177,17 +126,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-}
-
-// MARK: - Color Extension
-
-extension Color {
-    static let watchPrimary = Color(red: 0/255, green: 155/255, blue: 255/255)
-    static let watchSecondary = Color(red: 0/255, green: 78/255, blue: 182/255)
-    static let watchTertiary = Color(red: 230/255, green: 244/255, blue: 241/255)
-
-    static let previewBackgroundTop = Color(red: 161/255, green: 180/255, blue: 178/255)
-    static let previewCardBackground = Color(red: 42/255, green: 42/255, blue: 44/255)
-    static let highlightYellow = Color(red: 243/255, green: 213/255, blue: 91/255)
-    static let backgroundDarkBlue = Color(red: 26/255, green: 38/255, blue: 54/255)
 }

@@ -7,7 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A33E57AF2E0952C800A148FE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E57A92E0952C800A148FE /* ContentViewModel.swift */; };
 		A33E57C92E09F5E000A148FE /* TemperatureConversorWatchApp Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A33E57BC2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A33E57FB2E09FA8B00A148FE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E57F52E09FA8B00A148FE /* LocationManager.swift */; };
+		A33E580B2E09FAF800A148FE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E57A92E0952C800A148FE /* ContentViewModel.swift */; };
+		A33E58162E09FBAD00A148FE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E57F52E09FA8B00A148FE /* LocationManager.swift */; };
+		A33E581E2E09FC9D00A148FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33E58192E09FC9D00A148FE /* Assets.xcassets */; };
+		A33E58212E09FC9D00A148FE /* WatchUnitSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E581C2E09FC9D00A148FE /* WatchUnitSelectionView.swift */; };
+		A33E583C2E09FDB800A148FE /* WatchPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E583B2E09FDB600A148FE /* WatchPreviewView.swift */; };
+		A33E583D2E09FDB800A148FE /* WatchPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E583B2E09FDB600A148FE /* WatchPreviewView.swift */; };
+		A33E583E2E09FDEE00A148FE /* WatchUnitSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E581C2E09FC9D00A148FE /* WatchUnitSelectionView.swift */; };
+		A33E58402E09FE5200A148FE /* Color+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E583F2E09FE4900A148FE /* Color+AppColors.swift */; };
+		A33E58412E09FE5200A148FE /* Color+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33E583F2E09FE4900A148FE /* Color+AppColors.swift */; };
+		A33E58422E09FF0F00A148FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33E58192E09FC9D00A148FE /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +48,31 @@
 
 /* Begin PBXFileReference section */
 		A30DC16A2E05FB140090869B /* TemperatureConversor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemperatureConversor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33E57A92E0952C800A148FE /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		A33E57BC2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TemperatureConversorWatchApp Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33E57F52E09FA8B00A148FE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A33E58192E09FC9D00A148FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A33E581C2E09FC9D00A148FE /* WatchUnitSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchUnitSelectionView.swift; sourceTree = "<group>"; };
+		A33E583B2E09FDB600A148FE /* WatchPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchPreviewView.swift; sourceTree = "<group>"; };
+		A33E583F2E09FE4900A148FE /* Color+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+AppColors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A33E58132E09FB7100A148FE /* Exceptions for "Services" folder in "TemperatureConversorWatchApp Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WeatherService.swift,
+			);
+			target = A33E57BB2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App */;
+		};
+		A33E58152E09FB7700A148FE /* Exceptions for "Models" folder in "TemperatureConversorWatchApp Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WeatherModels.swift,
+			);
+			target = A33E57BB2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A30DC16C2E05FB140090869B /* TemperatureConversor */ = {
@@ -48,6 +83,22 @@
 		A33E57BD2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "TemperatureConversorWatchApp Watch App";
+			sourceTree = "<group>";
+		};
+		A33E580D2E09FB4A00A148FE /* Services */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A33E58132E09FB7100A148FE /* Exceptions for "Services" folder in "TemperatureConversorWatchApp Watch App" target */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A33E58102E09FB6600A148FE /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A33E58152E09FB7700A148FE /* Exceptions for "Models" folder in "TemperatureConversorWatchApp Watch App" target */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,6 +127,7 @@
 				A30DC16C2E05FB140090869B /* TemperatureConversor */,
 				A33E57BD2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App */,
 				A30DC16B2E05FB140090869B /* Products */,
+				A33E57CE2E09F8BA00A148FE /* Shared */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +138,21 @@
 				A33E57BC2E09F5C900A148FE /* TemperatureConversorWatchApp Watch App.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A33E57CE2E09F8BA00A148FE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A33E583F2E09FE4900A148FE /* Color+AppColors.swift */,
+				A33E583B2E09FDB600A148FE /* WatchPreviewView.swift */,
+				A33E57A92E0952C800A148FE /* ContentViewModel.swift */,
+				A33E580D2E09FB4A00A148FE /* Services */,
+				A33E58102E09FB6600A148FE /* Models */,
+				A33E57F52E09FA8B00A148FE /* LocationManager.swift */,
+				A33E581C2E09FC9D00A148FE /* WatchUnitSelectionView.swift */,
+				A33E58192E09FC9D00A148FE /* Assets.xcassets */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +174,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				A30DC16C2E05FB140090869B /* TemperatureConversor */,
+				A33E580D2E09FB4A00A148FE /* Services */,
+				A33E58102E09FB6600A148FE /* Models */,
 			);
 			name = TemperatureConversor;
 			packageProductDependencies = (
@@ -180,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33E581E2E09FC9D00A148FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33E58422E09FF0F00A148FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +268,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33E57AF2E0952C800A148FE /* ContentViewModel.swift in Sources */,
+				A33E57FB2E09FA8B00A148FE /* LocationManager.swift in Sources */,
+				A33E583C2E09FDB800A148FE /* WatchPreviewView.swift in Sources */,
+				A33E58402E09FE5200A148FE /* Color+AppColors.swift in Sources */,
+				A33E58212E09FC9D00A148FE /* WatchUnitSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33E580B2E09FAF800A148FE /* ContentViewModel.swift in Sources */,
+				A33E583D2E09FDB800A148FE /* WatchPreviewView.swift in Sources */,
+				A33E58162E09FBAD00A148FE /* LocationManager.swift in Sources */,
+				A33E58412E09FE5200A148FE /* Color+AppColors.swift in Sources */,
+				A33E583E2E09FDEE00A148FE /* WatchUnitSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +489,7 @@
 				DEVELOPMENT_TEAM = V7R5AT8JCX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = TemperatureConversorWatchApp;
+				INFOPLIST_KEY_CFBundleDisplayName = TemperatureConversor;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.ViewControllerClass.TemperatureConversor;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -438,7 +519,7 @@
 				DEVELOPMENT_TEAM = V7R5AT8JCX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = TemperatureConversorWatchApp;
+				INFOPLIST_KEY_CFBundleDisplayName = TemperatureConversor;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.ViewControllerClass.TemperatureConversor;
 				LD_RUNPATH_SEARCH_PATHS = (

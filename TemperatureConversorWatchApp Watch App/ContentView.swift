@@ -1,24 +1,10 @@
-//
-//  ContentView.swift
-//  TemperatureConversorWatchApp Watch App
-//
-//  Created by Suno on 23/06/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @StateObject var viewModel = ContentViewModel()
+    @State var showWatchUnitSheet = false
 
-#Preview {
-    ContentView()
+    var body: some View {
+        WatchPreviewView(viewModel: viewModel, showWatchUnitSheet: $showWatchUnitSheet)
+    }
 }
