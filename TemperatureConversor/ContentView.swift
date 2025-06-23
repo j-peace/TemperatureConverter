@@ -1,20 +1,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var locationManager = LocationManager()
-    private let temperatureInCelsius: Double = 17.0
-    @State private var isTextHidden = false
-
+    @StateObject private var viewModel = ContentViewModel()
+    
     var body: some View {
-        
-        VStack {
-            if let location = locationManager.lastKnownLocation {
-                Text("Latitude: \(location.latitude)")
-                Text("Longitude: \(location.longitude)")
-            } else {
-                Text("Getting location...")
-            }
-        }
         
         ZStack{
             LinearGradient(
@@ -43,7 +32,7 @@ struct ContentView: View {
                 .padding(.bottom, 20)
                 
                 ZStack {
-                    if !isTextHidden {
+                    if !viewModel.isTextHidden {
                         Color.previewCardBackground
                             .frame(width: 202, height: 232)
                             .padding(.trailing, 10)
@@ -58,7 +47,7 @@ struct ContentView: View {
                         .scaledToFit()
                         .frame(width: 500, height: 500)
                     
-                    if isTextHidden {
+                    if viewModel.isTextHidden {
                         
                         VStack {
                             
@@ -67,9 +56,14 @@ struct ContentView: View {
                                 .frame(width: 40, height: 40)
                                 .padding()
                             
-                            Text("\(temperatureInCelsius, specifier: "%.0f") °C")
-                                .font(.largeTitle)
-                                .foregroundColor(.watchPrimary)
+                            if let temp = viewModel.currentTemperature {
+                                Text("\(temp, specifier: "%.0f") °C")
+                                    .font(.largeTitle)
+                                    .foregroundColor(.watchPrimary)
+                            } else {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .watchPrimary))
+                            }
 
                             HStack (spacing: 10) {
                                 VStack {
@@ -91,7 +85,7 @@ struct ContentView: View {
                         }
                     }
                     
-                    if !isTextHidden {
+                    if !viewModel.isTextHidden {
                         VStack {
                             
                             Image("temperaturas")
@@ -100,8 +94,7 @@ struct ContentView: View {
                                 .padding()
 
                             Button(action: {
-                                isTextHidden.toggle()
-                                locationManager.checkLocationAuthorization()
+                                viewModel.togglePreview()
                             }) {
                                 Text("Preview")
                                     .font(.custom("GillSans-SemiBold", size: 20))
@@ -124,9 +117,9 @@ struct ContentView: View {
                     }
                 }.frame(height: 520)
                 VStack {
-                    if isTextHidden {
+                    if viewModel.isTextHidden {
                         Button(action: {
-                            isTextHidden.toggle()
+                            viewModel.togglePreview()
                         }) {
                             Text("Finish preview")
                                 .font(.custom("GillSans-SemiBold", size: 20))
@@ -148,6 +141,9 @@ struct ContentView: View {
                 }.frame(height: 80)
 
             }
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
 }
