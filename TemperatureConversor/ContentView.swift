@@ -55,9 +55,9 @@ struct ContentView: View {
                                     if !viewModel.units.isEmpty {
                                         WatchUnitSelectionView(
                                             units: viewModel.units,
-                                            selectedUnit: viewModel.temperatureUnitSymbol,
+                                            selectedUnit: viewModel.temperatureUnit,
                                             onSelect: { unit in
-                                                viewModel.temperatureUnit = unit
+                                                viewModel.selectUnit(unit)
                                                 showWatchUnitSheet = false
                                             },
                                             onClose: {
@@ -73,7 +73,7 @@ struct ContentView: View {
                                         .resizable()
                                         .frame(width: 40, height: 40)
                                         .padding()
-                                    if let temp = viewModel.currentTemperature {
+                                    if let temp = viewModel.currentConvertedTemperature {
                                         Text("\(temp, specifier: "%.0f") °\(viewModel.temperatureUnitSymbol)")
                                             .font(.largeTitle)
                                             .foregroundColor(.watchPrimary)

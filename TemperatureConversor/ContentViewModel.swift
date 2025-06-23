@@ -4,7 +4,8 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject {
     @Published var lastKnownLocation: CLLocationCoordinate2D?
-    @Published var currentTemperature: Double?
+    @Published var currentTemperature: Double? // Celsius from OpenMeteo
+    @Published var currentConvertedTemperature: Double? // Converted value for display
     @Published var isTextHidden = false
     @Published var temperatureUnit: String = "C" // Default to Celsius
     @Published var units: [String] = []
@@ -21,7 +22,6 @@ class ContentViewModel: ObservableObject {
         locationManager.checkLocationAuthorization()
         locationCancellable = locationManager.$lastKnownLocation.sink { [weak self] location in
             guard let self = self else { return }
-            print("[ViewModel] Location updated: \(String(describing: location))")
             self.lastKnownLocation = location
             if let location = location {
                 self.fetchTemperature(for: location)
@@ -31,10 +31,13 @@ class ContentViewModel: ObservableObject {
     }
     
     func onAppear() {
-        print("[ViewModel] onAppear called")
         locationManager.checkLocationAuthorization()
         if units.isEmpty {
             fetchUnits()
+        }
+        // Fetch conversion if we already have a temperature
+        if let temp = currentTemperature {
+            fetchConvertedTemperature(targetUnit: temperatureUnit, temperatureInCelsius: temp)
         }
     }
     
@@ -49,9 +52,7 @@ class ContentViewModel: ObservableObject {
                         self?.units = list.map { $0.uppercased() }
                     }
                 }
-            } catch {
-                print("Failed to decode units: \(error)")
-            }
+            } catch {}
         }
         task.resume()
     }
@@ -65,17 +66,73 @@ class ContentViewModel: ObservableObject {
     }
     
     private func fetchTemperature(for coordinate: CLLocationCoordinate2D) {
-        print("[ViewModel] Fetching temperature for: \(coordinate)")
         Task { [weak self] in
             do {
                 let temp = try await WeatherService.fetchTemperature(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 await MainActor.run {
-                    print("[ViewModel] Temperature fetched: \(temp)")
                     self?.currentTemperature = temp
+                    self?.fetchConvertedTemperature(targetUnit: self?.temperatureUnit ?? "C", temperatureInCelsius: temp)
+                }
+            } catch {}
+        }
+    }
+    
+    func selectUnit(_ unit: String) {
+        let normalized = unit.uppercased()
+        temperatureUnit = normalized
+        if let temp = currentTemperature {
+            fetchConvertedTemperature(targetUnit: normalized, temperatureInCelsius: temp)
+        }
+    }
+    
+    private func fetchConvertedTemperature(targetUnit: String, temperatureInCelsius: Double) {
+        // Always show loading
+        DispatchQueue.main.async {
+            self.currentConvertedTemperature = nil
+        }
+        // If unit is C, just show the original value
+        if targetUnit.uppercased() == "C" {
+            DispatchQueue.main.async {
+                self.currentConvertedTemperature = temperatureInCelsius
+            }
+            return
+        }
+        let apiUnit = targetUnit.uppercased()
+        guard let url = URL(string: "https://api-crimson-river-7025.fly.dev/conversion?targetUnit=\(apiUnit)&temperatureInCelsius=\(temperatureInCelsius)") else {
+            DispatchQueue.main.async {
+                self.currentConvertedTemperature = temperatureInCelsius
+            }
+            return
+        }
+        print("[Conversion] Payload: \(url)")
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return }
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    self.currentConvertedTemperature = temperatureInCelsius
+                }
+                return
+            }
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("[Conversion] Response: \(jsonString)")
+            }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let value = json["converted_temp"] as? Double {
+                    DispatchQueue.main.async {
+                        self.currentConvertedTemperature = value
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.currentConvertedTemperature = temperatureInCelsius
+                    }
                 }
             } catch {
-                print("[ViewModel] Failed to fetch temperature: \(error)")
+                DispatchQueue.main.async {
+                    self.currentConvertedTemperature = temperatureInCelsius
+                }
             }
         }
+        task.resume()
     }
 } 

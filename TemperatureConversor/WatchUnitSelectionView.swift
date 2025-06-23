@@ -10,15 +10,16 @@ struct WatchUnitSelectionView: View {
         VStack(spacing: 16) {
             ForEach(units, id: \.self) { unit in
                 Button(action: {
+                    print("[WatchUnitSelectionView] Botão clicado: \(unit)")
                     onSelect(unit)
                 }) {
-                    Text("°" + unit)
+                    Text("°" + unit.uppercased())
                         .font(.title2)
-                        .foregroundColor(unit == selectedUnit ? Color.watchPrimary : Color.watchPrimary)
+                        .foregroundColor(Color.watchPrimary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 8)
                         .background(
-                            unit == selectedUnit ? Color.watchPrimary.opacity(0.15) : Color.clear
+                            unit.lowercased() == selectedUnit.lowercased() ? Color.watchPrimary.opacity(0.15) : Color.clear
                         )
                         .cornerRadius(10)
                 }
