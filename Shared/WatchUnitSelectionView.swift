@@ -8,25 +8,30 @@ struct WatchUnitSelectionView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            ForEach(units, id: \.self) { unit in
-                Button(action: {
-                    print("[WatchUnitSelectionView] Botão clicado: \(unit)")
-                    onSelect(unit)
-                }) {
-                    Text("°" + unit.uppercased())
-                        .font(.title2)
-                        .foregroundColor(Color.watchPrimary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .background(
-                            unit.lowercased() == selectedUnit.lowercased() ? Color.watchPrimary.opacity(0.15) : Color.clear
-                        )
-                        .cornerRadius(10)
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(units, id: \.self) { unit in
+                        Button(action: {
+                            print("[WatchUnitSelectionView] Botão clicado: \(unit)")
+                            onSelect(unit)
+                        }) {
+                            Text("°" + unit.uppercased())
+                                .font(.title2)
+                                .foregroundColor(Color.watchPrimary)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 8)
+                                .background(
+                                    unit.lowercased() == selectedUnit.lowercased() ? Color.watchPrimary.opacity(0.15) : Color.clear
+                                )
+                                .cornerRadius(10)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
-                .buttonStyle(PlainButtonStyle())
             }
             Spacer()
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 } 
