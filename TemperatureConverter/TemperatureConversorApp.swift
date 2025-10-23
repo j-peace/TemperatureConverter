@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct TemperatureConversorApp: App {
+struct TemperatureConverterApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

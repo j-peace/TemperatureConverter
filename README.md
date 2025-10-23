@@ -13,12 +13,12 @@ A native iOS application developed in SwiftUI that converts temperatures in real
 ## Project Structure
 
 ```
-TemperatureConversor/
-├── TemperatureConversor/              # Main iOS app
-│   ├── TemperatureConversorApp.swift  # App entry point
+TemperatureConverter/
+├── TemperatureConverter/              # Main iOS app
+│   ├── TemperatureConverterApp.swift  # App entry point
 │   └── ContentView.swift              # Main interface
-├── TemperatureConversorWatchApp/      # Apple Watch app
-│   ├── TemperatureConversorWatchAppApp.swift
+├── TemperatureConverterWatchApp/      # Apple Watch app
+│   ├── TemperatureConverterWatchAppApp.swift
 │   └── ContentView.swift
 └── Shared/                            # Shared code
     ├── ContentViewModel.swift         # Business logic
@@ -44,13 +44,13 @@ TemperatureConversor/
 
 1. Clone the repository:
 ```bash
-git clone git@github.com:j-peace/TemperatureConversor.git
-cd TemperatureConversor
+git clone git@github.com:j-peace/TemperatureConverter.git
+cd TemperatureConverter
 ```
 
 2. Open the project in Xcode:
 ```bash
-open TemperatureConversor.xcodeproj
+open TemperatureConverter.xcodeproj
 ```
 
 3. Select the target device (iPhone or Apple Watch)
