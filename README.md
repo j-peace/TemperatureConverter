@@ -1,4 +1,4 @@
-# Temperature Conversion
+# Temperature Converter
 
 A native iOS application developed in SwiftUI that converts temperatures in real-time using weather data from your current location.
 
