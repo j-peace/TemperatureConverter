@@ -17,7 +17,7 @@ struct ContentView: View {
             )
             .ignoresSafeArea()
             VStack {
-                Text("Temperature Conversor")
+                Text("Temperature Converter")
                     .font(.custom("GillSans-SemiBold", size: 27))
                     .foregroundColor(.watchTertiary)
 
