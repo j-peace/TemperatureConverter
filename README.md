@@ -80,4 +80,7 @@ The app requires the following permissions in `Info.plist`:
 3. **Conversion**: Sends temperature in Celsius to conversion API
 4. **Display**: Shows converted result in the interface
 
+## Hacktoberfest Contributions
+
+As you may know, Digital Ocean changed its rules about hacktoberfest contributions. This repo is open for contributions even if hacktoberfest does not award badges for accepted pull requests anymore. Feel free to look on the issues tab or open other issues
 ---
